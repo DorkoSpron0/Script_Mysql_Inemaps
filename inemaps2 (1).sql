@@ -64,7 +64,7 @@ CREATE TABLE `posts` (
   `descripcion` varchar(280) NOT NULL,
   `categoria` varchar(45) DEFAULT NULL,
   `codigoEstudiante` int(11) NOT NULL,
-  `idCategoria` int(11) NOT NULL
+  `idCategoria` int(11)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 DROP TABLE IF EXISTS Categorias;
@@ -2169,6 +2169,22 @@ UPDATE comentarios
     WHERE idComentario >= 13
     AND idComentario <= 20;
     
+/*UPDATE CATEGORIA*/
+SELECT * FROM inemaps.posts;
+
+UPDATE posts
+	SET idCategoria = 1
+		WHERE categoria LIKE "%Informacion%";
+UPDATE posts
+	SET idCategoria = 2
+		WHERE categoria LIKE "%Anuncio%";
+UPDATE posts
+	SET idCategoria = 3
+		WHERE categoria LIKE "%Quejas%";
+UPDATE posts
+	SET idCategoria = 4
+		WHERE categoria LIKE "%Dudas%";
+    
 
 /*UPDATE ESTUDIANTE*/
 UPDATE estudiantes
@@ -2227,11 +2243,11 @@ DELETE FROM estudiantes WHERE codigoEstudiante = "1000";
 
 /*INSERTS*/
 insert estudiantes VALUES (1000, 'danisanmez@gmail.com', 'nacional37', 'Tazana');
-insert posts VALUES (510, '2022-06-04', 'Civica estudiantil >:c', 'AYUDA', 1000);
+insert posts(idpost, fechaPublicacion, descripcion, categoria, codigoEstudiante) VALUES (510, '2022-06-04', 'Civica estudiantil >:c', 'AYUDA', 1000);
 insert comentarios VALUES (510, 'No hay civica estudiantil >:c', '2022-06-04', 1000, 510);
 
 insert estudiantes VALUES (123, 'juandorko123@gmail.com', 'nacional36', 'Garcia');
-insert posts VALUES (511, '2022-06-04', 'Civica estudiantil >:c', 'AYUDA', 123);
+insert posts(idpost, fechaPublicacion, descripcion, categoria, codigoEstudiante) VALUES (511, '2022-06-04', 'Civica estudiantil >:c', 'AYUDA', 123);
 insert comentarios VALUES (511, 'No hay civica estudiantil >:c', '2022-06-04', 123, 511);
 
 #ESTUDIANTES
@@ -2672,10 +2688,10 @@ select c.codigoEstudiante, c.descripcion comentario, p.categoria
 #---------------------------------------------------------------------------------
 #Unión
 
-SELECT *
+SELECT c.idComentario, c.descripcion, c.fechaPublicacion, c.codigoEstudiante, c.idpost
 FROM comentarios c
 UNION
-SELECT *
+SELECT p.idpost, p.fechaPublicacion, p.descripcion, p.categoria, p.codigoEstudiante
 FROM posts p;
        
 SELECT e.nombreEstudiante, c.codigoEstudiante, p.descripcion
