@@ -2833,6 +2833,44 @@ FROM comentarios AS c
 SELECT p.idPost, p.descripcion
 FROM posts AS p
     ORDER BY p.idPost DESC;
+    
+        
+#VIEWS
+
+#VIEW ESTUDIANTES - COMENTARIOS
+CREATE VIEW estudiantesComentario AS
+SELECT e.nombreEstudiante, e.contraseña, c.idComentario, c.descripcion
+FROM estudiantes AS e, comentarios AS c
+WHERE e.codigoEstudiante = c.codigoEstudiante;
+
+# CREATE VIEW COMENTARIO - POST
+CREATE VIEW comentariosPosts AS
+SELECT c.idComentario, c.descripcion, p.idpost, p.categoria
+FROM comentarios AS c, posts AS p
+WHERE c.idpost = p.idpost
+AND c.idpost >= 162
+AND c.idpost <= 260;
+
+#CREATE VIEW POST - CATEGORIAS
+CREATE VIEW postsCategoria AS
+select p.descripcion post, p.categoria, c.fechaPublicacion fecha
+	from comentarios c
+		cross join posts p on c.idpost = p.idpost
+			where c.codigoEstudiante < 40
+            and p.categoria = "Quejas";
+            
+# VIEW estudiantesComentarios 
+CREATE VIEW estudiantesComentarios AS
+SELECT e.nombreEstudiante, c.codigoEstudiante, p.descripcion
+FROM comentarios c, posts p
+        NATURAL JOIN estudiantes e
+WHERE e.codigoEstudiante = p.codigoEstudiante
+	AND c.descripcion LIKE "%ma"
+UNION
+SELECT p.categoria, c.descripcion AS DescripcionComentario, e.nombreEstudiante
+FROM posts p, comentarios c, estudiantes e
+WHERE p.idpost = c.idpost
+AND p.categoria LIKE "%UDA";
 
 COMMIT;
 
