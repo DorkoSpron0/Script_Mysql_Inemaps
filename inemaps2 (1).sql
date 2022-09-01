@@ -2903,6 +2903,32 @@ FROM estudiantes e
         LEFT JOIN comentarios c ON e.codigoEstudiante = c.codigoEstudiante
 GROUP BY e.codigoEstudiante;
 
+# Views De Jara
+
+CREATE VIEW EstudiantesPosts as
+SELECT e.contraseña, c.fechaPublicacion
+	FROM estudiantes e
+		RIGHT JOIN comentarios c ON e.codigoEstudiante = c.codigoEstudiante
+	WHERE c.fechaPublicacion BETWEEN "2022-03-27" AND "2022-04-06";
+
+CREATE VIEW idpostEstudiantes as
+SELECT p.idpost AS Id_Post, e.nombreEstudiante, p.fechaPublicacion
+	FROM posts p
+		RIGHT JOIN estudiantes e ON p.codigoEstudiante = e.codigoEstudiante
+	WHERE p.idpost >= 5;
+
+CREATE VIEW descripcionNombre as
+select e.nombreEstudiante nombre, c.descripcion comentarios
+	from comentarios c
+		natural join estudiantes e
+			where c.descripcion like "%ORMACI%"
+				and e.nombreEstudiante like "%Daniel Jara%";
+
+CREATE VIEW numeroComentarios as
+select count(c.idComentario) ComentariosConPost7 
+	from comentarios c
+		cross join posts p on c.idpost = p.idpost
+			where p.idpost = 10;
 
 COMMIT;
 

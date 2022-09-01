@@ -32,11 +32,11 @@
 
         <label> categoria </label>
         <select name="category" required> 
-                        <option value="1" selected>Informacion</option>
-                        <option value="2">Avisos</option>
-                        <option value="3">Dudas</option>
-                        <option value="4">Quejas</option>
-                    </select>
+            <option value="1" selected>Informacion</option>
+            <option value="2">Avisos</option>
+            <option value="3">Dudas</option>
+            <option value="4">Quejas</option>
+        </select>
         
         <br>
         
