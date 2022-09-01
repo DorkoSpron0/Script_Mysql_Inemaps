@@ -2836,11 +2836,6 @@ FROM posts AS p
     
         
 #VIEWS
-#VIEW ESTUDIANTES - POST
-CREATE VIEW DescripcionP0correoE AS
-SELECT p.descripcion AS descripcionPost, e.correo
-FROM posts p
-CROSS JOIN estudiantes e;
 
 #VIEW ESTUDIANTES - COMENTARIOS
 CREATE VIEW estudiantesComentario AS
@@ -2855,24 +2850,6 @@ FROM comentarios AS c, posts AS p
 WHERE c.idpost = p.idpost
 AND c.idpost >= 162
 AND c.idpost <= 260;
-
-#VIEW IdE DescripcionC CategoriaP
-
-CREATE VIEW IdE0DescripcionC0CategoriaP as
-select c.codigoEstudiante, c.descripcion comentario, p.categoria
-	from comentarios c
-		left join posts p
-			on c.idpost = p.idpost
-            where p.codigoEstudiante = c.codigoEstudiante
-            or c.descripcion like "M%P"
-            order by c.descripcion desc;
-
-#VIEW IdE CategoriaP
-CREATE VIEW  IdE0CategoriaP AS
-SELECT c.codigoEstudiante, p.categoria
-FROM comentarios c
-    INNER JOIN posts p ON c.codigoEstudiante = p.codigoEstudiante
-    WHERE p.categoria = "Quejas";
 
 #CREATE VIEW POST - CATEGORIAS
 CREATE VIEW postsCategoria AS
@@ -2895,14 +2872,16 @@ FROM posts p, comentarios c, estudiantes e
 WHERE p.idpost = c.idpost
 AND p.categoria LIKE "%UDA";
 
-#VIEW IDestudiante Idcomentario
 
-CREATE VIEW IdEstudianteIdComentario as
+/*Views Larrea*/
+#VIEW IdE IdC
+CREATE VIEW IdE0IdC as
 SELECT e.codigoEstudiante, c.idComentario
 FROM estudiantes e
         LEFT JOIN comentarios c ON e.codigoEstudiante = c.codigoEstudiante
 GROUP BY e.codigoEstudiante;
 
+<<<<<<< HEAD
 # Views De Jara
 
 CREATE VIEW EstudiantesPosts as
@@ -2929,6 +2908,58 @@ select count(c.idComentario) ComentariosConPost7
 	from comentarios c
 		cross join posts p on c.idpost = p.idpost
 			where p.idpost = 10;
+=======
+#VIEW IdE CategoriaP
+CREATE VIEW  IdE0CategoriaP AS
+SELECT c.codigoEstudiante, p.categoria
+FROM comentarios c
+    INNER JOIN posts p ON c.codigoEstudiante = p.codigoEstudiante
+    WHERE p.categoria = "Quejas";
+
+#VIEW IdE DescripcionC CategoriaP
+CREATE VIEW IdE0DescripcionC0CategoriaP as
+select c.codigoEstudiante, c.descripcion comentario, p.categoria
+	from comentarios c
+		left join posts p
+			on c.idpost = p.idpost
+            where p.codigoEstudiante = c.codigoEstudiante
+            or c.descripcion like "M%P"
+            order by c.descripcion desc;
+            
+#VIEW DescripcionP correoE
+CREATE VIEW DescripcionP0correoE AS
+SELECT p.descripcion AS descripcionPost, e.correo
+FROM posts p
+CROSS JOIN estudiantes e;
+
+/*Views Daniel Santana*/
+CREATE VIEW FechaPrimerPost AS
+SELECT e.nombreEstudiante AS Nombre, p.fechaPublicacion AS Fecha_Publicacion_Primer_Post
+	FROM estudiantes e
+			CROSS JOIN posts p ON e.codigoEstudiante = p.codigoEstudiante
+		WHERE p.fechaPublicacion BETWEEN "2021-03-01" AND "2021-05-01";
+        
+CREATE VIEW NumeroPostsxCategoria AS
+SELECT COUNT(e.correo) AS Cantidad, p.categoria AS Categoria
+	FROM estudiantes e 
+		CROSS JOIN posts p ON e.codigoEstudiante = p.codigoEstudiante
+			GROUP BY p.categoria
+				HAVING COUNT(e.correo);
+                
+CREATE VIEW InformacionComentarios_Posts_con_Doce AS
+SELECT p.codigoEstudiante AS Id_Estudiante, c.descripcion AS Contenido_Comentario, c.idpost AS Id_Post_Comentado
+	FROM posts p
+			CROSS JOIN comentarios c ON c.codigoEstudiante = p.codigoEstudiante
+		WHERE c.idpost LIKE "%12%";
+    
+CREATE VIEW Post_sobre_Quejas AS 
+SELECT e.correo, p.descripcion post, p.categoria, p.fechaPublicacion fecha
+	FROM estudiantes e
+		NATURAL JOIN posts p
+			WHERE p.categoria = "Quejas"
+				AND p.fechaPublicacion LIKE "2021-01%";
+
+>>>>>>> 086de9e2704e9804c52f36c2ced01d2b9ad645f3
 
 COMMIT;
 
