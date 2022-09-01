@@ -2904,6 +2904,35 @@ FROM estudiantes e
 GROUP BY e.codigoEstudiante;
 
 
+
+/*Views Daniel Santana*/
+CREATE VIEW FechaPrimerPost AS
+SELECT e.nombreEstudiante AS Nombre, p.fechaPublicacion AS Fecha_Publicacion_Primer_Post
+	FROM estudiantes e
+			CROSS JOIN posts p ON e.codigoEstudiante = p.codigoEstudiante
+		WHERE p.fechaPublicacion BETWEEN "2021-03-01" AND "2021-05-01";
+        
+CREATE VIEW NumeroPostsxCategoria AS
+SELECT COUNT(e.correo) AS Cantidad, p.categoria AS Categoria
+	FROM estudiantes e 
+		CROSS JOIN posts p ON e.codigoEstudiante = p.codigoEstudiante
+			GROUP BY p.categoria
+				HAVING COUNT(e.correo);
+                
+CREATE VIEW InformacionComentarios_Posts_con_Doce AS
+SELECT p.codigoEstudiante AS Id_Estudiante, c.descripcion AS Contenido_Comentario, c.idpost AS Id_Post_Comentado
+	FROM posts p
+			CROSS JOIN comentarios c ON c.codigoEstudiante = p.codigoEstudiante
+		WHERE c.idpost LIKE "%12%";
+    
+CREATE VIEW Post_sobre_Quejas AS 
+SELECT e.correo, p.descripcion post, p.categoria, p.fechaPublicacion fecha
+	FROM estudiantes e
+		NATURAL JOIN posts p
+			WHERE p.categoria = "Quejas"
+				AND p.fechaPublicacion LIKE "2021-01%";
+
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
