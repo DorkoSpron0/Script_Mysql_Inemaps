@@ -1,5 +1,5 @@
 <?php
-    require 'conexion/conn.php';
+    require '../conexion/conn.php';
 
     $fecha = $_POST['fechaSolicitud'];
     $sql = 'SELECT * FROM estudiantes';
