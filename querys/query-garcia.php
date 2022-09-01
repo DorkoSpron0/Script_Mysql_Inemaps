@@ -1,3 +1,8 @@
+<?php
+
+    require "../conexion/conn.php";
+    $correo = $_POST["correo1"];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,30 +21,17 @@
             <li><a href="formularios/form-nicky.php">Formulario Nicky</a></li>
         </ul>
     </nav>
-    <main>
-        <h2><b>Consultar descripcion de post por correo</b></h2>
-        <form action="../querys/query-garcia.php" method="post">
-            <table border=1>
-                <tr>
-                    <td>
-                        <label for="correo1">Inserte su correo </label>
-                        <input type="text" name="correo1" placeholder="Correo" autofocus required>
-                    </td>
-                    
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <center><input type="submit" placeholder="Enviar"></center>
-                    </td>
-                </tr>
-            </table>
-        </form>
+    <h2>Resultado:</h2>
+    <?php
+        $query = "SELECT p.descripcion, e.codigoEstudiante FROM posts p CROSS JOIN estudiantes e ON p.codigoEstudiante = e.codigoEstudiante WHERE e.correo LIKE '%" . $correo . "%'";
+        $result = MYSQLI_QUERY($xcon, $query);
+
+        while($datos = MYSQLI_FETCH_ASSOC($result)) {
+            echo "<p>ID del autor: " . $datos["codigoEstudiante"] . " | Contenido del Post: " . $datos["descripcion"] . "</p>";
+        }
+
+    ?>
 
 
-
-
-
-
-    </main>
 </body>
 </html>
