@@ -66,8 +66,8 @@ CREATE TABLE `posts` (
   `idCategoria` int(11)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-DROP TABLE IF EXISTS Categorias;
-CREATE TABLE Categorias(
+DROP TABLE IF EXISTS categorias;
+CREATE TABLE categorias(
 	idCategoria int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     descripcion varchar(15) NOT NULL
 );
