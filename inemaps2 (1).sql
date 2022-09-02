@@ -66,7 +66,8 @@ CREATE TABLE `posts` (
   `idCategoria` int(11)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-DROP TABLE IF EXISTS categorias;
+
+
 CREATE TABLE categorias(
 	idCategoria int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     descripcion varchar(15) NOT NULL
@@ -2172,18 +2173,24 @@ UPDATE comentarios
 SELECT * FROM inemaps.posts;
 
 UPDATE posts
+	SET categoria = "Eventos"
+		WHERE categoria = "Anuncio";
+UPDATE posts
+	SET categoria = "Dudas"
+		WHERE categoria = "AYUDA";
+
+UPDATE posts
 	SET idCategoria = 1
-		WHERE categoria LIKE "%Informacion%";
+		WHERE categoria LIKE "Informacion";
 UPDATE posts
 	SET idCategoria = 2
-		WHERE categoria LIKE "%Anuncio%";
+		WHERE categoria LIKE "Eventos";
 UPDATE posts
 	SET idCategoria = 3
-		WHERE categoria LIKE "%Quejas%";
+		WHERE categoria LIKE "Quejas";
 UPDATE posts
 	SET idCategoria = 4
-		WHERE categoria LIKE "%Dudas%";
-    
+		WHERE categoria LIKE "Dudas";
 
 /*UPDATE ESTUDIANTE*/
 UPDATE estudiantes
@@ -2833,7 +2840,7 @@ SELECT p.idPost, p.descripcion
 FROM posts AS p
     ORDER BY p.idPost DESC;
     
-        
+
 #VIEWS
 
 #VIEW ESTUDIANTES - COMENTARIOS
@@ -2928,33 +2935,34 @@ SELECT p.descripcion AS descripcionPost, e.correo
 FROM posts p
 CROSS JOIN estudiantes e;
 
+
+
 /*Views Daniel Santana*/
 CREATE VIEW FechaPrimerPost AS
-SELECT e.nombreEstudiante AS Nombre, p.fechaPublicacion AS Fecha_Publicacion_Primer_Post
+SELECT e.nombreEstudiante AS Nombre, p.fechaPublicacion AS FechaPublicacionPrimerPost
 	FROM estudiantes e
 			CROSS JOIN posts p ON e.codigoEstudiante = p.codigoEstudiante
-		WHERE p.fechaPublicacion BETWEEN "2021-03-01" AND "2021-05-01";
+		WHERE p.fechaPublicacion LIKE "2021-%";
         
-CREATE VIEW NumeroPostsxCategoria AS
-SELECT COUNT(e.correo) AS Cantidad, p.categoria AS Categoria
+CREATE VIEW NumeroCorreosxCategoria AS
+SELECT COUNT(e.correo) AS Cantidad, p.categoria AS Categoria, p.idCategoria AS Id_Categoria
 	FROM estudiantes e 
 		CROSS JOIN posts p ON e.codigoEstudiante = p.codigoEstudiante
 			GROUP BY p.categoria
 				HAVING COUNT(e.correo);
                 
-CREATE VIEW InformacionComentarios_Posts_con_Doce AS
-SELECT p.codigoEstudiante AS Id_Estudiante, c.descripcion AS Contenido_Comentario, c.idpost AS Id_Post_Comentado
-	FROM posts p
-			CROSS JOIN comentarios c ON c.codigoEstudiante = p.codigoEstudiante
-		WHERE c.idpost LIKE "%12%";
+CREATE VIEW InformacionComentarios AS
+SELECT c.codigoEstudiante AS Id_Estudiante, e.nombreEstudiante AS Nombre, c.descripcion AS Contenido_Comentario, c.idpost AS ID_Post_Comentado
+	FROM comentarios c
+		CROSS JOIN estudiantes e ON c.codigoEstudiante = e.codigoEstudiante;
     
-CREATE VIEW Post_sobre_Quejas AS 
-SELECT e.correo, p.descripcion post, p.categoria, p.fechaPublicacion fecha
+CREATE VIEW PostsobreQuejas AS 
+SELECT e.correo AS Correo, p.descripcion AS Contenido_Queja, p.fechaPublicacion AS Fecha_Publicacion
 	FROM estudiantes e
 		NATURAL JOIN posts p
 			WHERE p.categoria = "Quejas"
-				AND p.fechaPublicacion LIKE "2021-01%";
-                
+				AND p.fechaPublicacion LIKE "2021-%";
+
 
 
 COMMIT;
