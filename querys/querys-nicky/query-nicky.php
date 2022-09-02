@@ -1,9 +1,8 @@
 <?php
-    require '../conexion/conn.php';
+    require '../../conexion/conn.php';
 
-    $fecha = $_POST['fechaSolicitud'];
-    $sql = 'SELECT * FROM estudiantes';
-
+    $idestudiante = $_POST['idestudiante'];
+    $sql = "SELECT * FROM estudiantescomentario WHERE codigoEstudiante = ".$idestudiante;
 ?>
 
 <!DOCTYPE html>
@@ -15,12 +14,13 @@
     <title>Document</title>
 </head>
 <body>
-    <p>La fecha es: <?php echo $fecha ?></p>
     <?php     
         $result = mysqli_query($xcon, $sql);
 
         while($datos = mysqli_fetch_assoc($result)) {
-            echo $datos["correo"]. "<br>";
+            echo $datos["nombreEstudiante"]. "<br>";
+            echo $datos["idComentario"]. "<br>";
+            echo $datos["descripcion"]. "<br> <hr>";
         }
     ?>
 

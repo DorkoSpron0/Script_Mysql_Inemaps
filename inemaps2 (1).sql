@@ -21,7 +21,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `inemaps`
 --
-
 DROP DATABASE IF EXISTS inemaps;
 CREATE DATABASE inemaps DEFAULT CHARACTER SET utf8mb4;
 USE inemaps;
@@ -2839,7 +2838,7 @@ FROM posts AS p
 
 #VIEW ESTUDIANTES - COMENTARIOS
 CREATE VIEW estudiantesComentario AS
-SELECT e.nombreEstudiante, e.contraseña, c.idComentario, c.descripcion
+SELECT e.codigoEstudiante, e.nombreEstudiante, e.contraseña, c.idComentario, c.descripcion
 FROM estudiantes AS e, comentarios AS c
 WHERE e.codigoEstudiante = c.codigoEstudiante;
 
@@ -2855,9 +2854,7 @@ AND c.idpost <= 260;
 CREATE VIEW postsCategoria AS
 select p.descripcion post, p.categoria, c.fechaPublicacion fecha
 	from comentarios c
-		cross join posts p on c.idpost = p.idpost
-			where c.codigoEstudiante < 40
-            and p.categoria = "Quejas";
+		cross join posts p on c.idpost = p.idpost;
             
 # VIEW estudiantesComentarios 
 CREATE VIEW estudiantesComentarios AS
@@ -2881,7 +2878,6 @@ FROM estudiantes e
         LEFT JOIN comentarios c ON e.codigoEstudiante = c.codigoEstudiante
 GROUP BY e.codigoEstudiante;
 
-<<<<<<< HEAD
 # Views De Jara
 
 CREATE VIEW EstudiantesPosts as
@@ -2908,7 +2904,7 @@ select count(c.idComentario) ComentariosConPost7
 	from comentarios c
 		cross join posts p on c.idpost = p.idpost
 			where p.idpost = 10;
-=======
+
 #VIEW IdE CategoriaP
 CREATE VIEW  IdE0CategoriaP AS
 SELECT c.codigoEstudiante, p.categoria
@@ -2958,8 +2954,8 @@ SELECT e.correo, p.descripcion post, p.categoria, p.fechaPublicacion fecha
 		NATURAL JOIN posts p
 			WHERE p.categoria = "Quejas"
 				AND p.fechaPublicacion LIKE "2021-01%";
+                
 
->>>>>>> 086de9e2704e9804c52f36c2ced01d2b9ad645f3
 
 COMMIT;
 

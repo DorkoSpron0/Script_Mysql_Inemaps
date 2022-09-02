@@ -1,9 +1,9 @@
 <?php
-    require '../conexion/conn.php';
+    require '../../conexion/conn.php';
 
     $nombre = $_POST['nombreEstudiante'];
     $paswword = $_POST['passwordEstudiante'];
-    $sql = "SELECT * FROM estudiantesComentario WHERE nombreEstudiante = '".$nombre."' AND contraseña '".$paswword."'";
+    $sql = "SELECT * FROM estudiantesComentario WHERE nombreEstudiante = '".$nombre."' AND contraseña = '".$paswword."'";
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +15,6 @@
     <title>Document</title>
 </head>
 <body>
-    <p>La fecha es: <?php echo $fecha ?></p>
     <?php     
         $result = mysqli_query($xcon, $sql);
 

@@ -1,8 +1,9 @@
 <?php
-    require '../conexion/conn.php';
+    require '../../conexion/conn.php';
 
-    $fecha = $_POST['fechaPost'];
-    $sql = "SELECT * FROM postsCategoria WHERE fecha BETWEEN '".$fecha."' AND '2023-12-30'";
+    $fecha = $_POST['fechaPostMin'];
+    $fecha2 = $_POST['fechaPostMax'];
+    $sql = "SELECT * FROM postsCategoria WHERE fecha BETWEEN '".$fecha."' AND '".$fecha2."'";
     echo $sql;
 ?>
 

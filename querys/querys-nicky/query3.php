@@ -1,9 +1,11 @@
 <?php
-    require '../conexion/conn.php';
+    require '../../conexion/conn.php';
 
-    $idMin = $_POST['idMIn'];
+    $idMin = $_POST['idMin'];
     $idMax= $_POST['idMax'];
-    $sql = "SELECT * FROM comentariosPosts WHERE idpost BETWEEN".$idMin." AND ".$idMax;
+    $sql = "SELECT * FROM comentariosPosts WHERE idpost BETWEEN ".$idMin." AND ".$idMax;
+
+    echo $sql;
 
 ?>
 
@@ -16,7 +18,6 @@
     <title>Document</title>
 </head>
 <body>
-    <p>La fecha es: <?php echo $fecha ?></p>
     <?php     
         $result = mysqli_query($xcon, $sql);
 

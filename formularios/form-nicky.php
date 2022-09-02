@@ -39,10 +39,13 @@
         <input type="submit" value="Enviar">
     </form>
 
-    <form action="../querys/querys-nicky/quer4.php" method="POST">
+    <form action="../querys/querys-nicky/queyr4.php" method="POST">
         <label> ID </label>
-        <input type="date" name="fechaPost" required>
+        <input type="date" name="fechaPostMin" required>
+        <input type="date" name="fechaPostMax" required>
         <input type="submit" value="Enviar">
     </form>
+
+
 </body>
 </html>
