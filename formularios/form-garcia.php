@@ -18,7 +18,7 @@
     </nav>
     <main>
         <h2><b>Consultar descripcion de post por correo</b></h2>
-        <form action="../querys/query-garcia.php" method="post">
+        <form action="../querys/querys-garcia/query-garcia.php" method="post">
             <table border=1>
                 <tr>
                     <td>
@@ -35,10 +35,60 @@
             </table>
         </form>
 
+        <h2><b>Consultar correo por codigo de estudiante</b></h2>
+        <form action="../querys/querys-garcia/query2-garcia.php" method="post">
+            <table border=1>
+                <tr>
+                    <td>
+                        <label for="eid">Inserte su codigo de estudiante </label>
+                        <input type="text" name="eid" placeholder="Codigo" autofocus required>
+                    </td>
+                    
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <center><input type="submit" placeholder="Enviar"></center>
+                    </td>
+                </tr>
+            </table>
+        </form>
 
-
-
-
+        <h2><b>Consultar id del post por nombre y contrasenia</b></h2>
+        <form action="../querys/querys-garcia/query3-garcia.php" method="post">
+            <table border=1>
+                <tr>
+                    <td>
+                        <label for="contrasena">Inserte su contrasena </label>
+                        <input type="text" name="contrasena" placeholder="contrasena" autofocus required>
+                    </td>
+                    <td>
+                        <label for="nombre">Inserte su nombre de usuario </label>
+                        <input type="text" name="nombre" placeholder="nombre" autofocus required>
+                    </td>                    
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <center><input type="submit" placeholder="Enviar"></center>
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <h2><b>Consultar fecha del comentario segun id del comentario</b></h2>
+        <form action="../querys/querys-garcia/query4-garcia.php" method="post">
+            <table border=1>
+                <tr>
+                    <td>
+                        <label for="cid">Inserte el id del comentario </label>
+                        <input type="text" name="cid" placeholder="id del comentario" autofocus required>
+                    </td>                  
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <center><input type="submit" placeholder="Enviar"></center>
+                    </td>
+                </tr>
+            </table>
+        </form>
 
     </main>
 </body>
