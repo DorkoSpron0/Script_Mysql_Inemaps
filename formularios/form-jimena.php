@@ -19,7 +19,7 @@
 
 <h3>Consultar el id de los comentarios</h3>
     <form action="../querys/querys-jimena/query-id.php" method="POST">
-        <label>Ingrese el comentario</label>
+        <label>Ingrese un fragmento del comentario</label>
         <input type="text" name="com" required>
         <br>
         <input type="submit" value="Enviar">

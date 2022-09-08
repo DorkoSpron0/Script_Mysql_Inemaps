@@ -2963,6 +2963,29 @@ SELECT e.correo AS Correo, p.descripcion AS Contenido_Queja, p.fechaPublicacion 
 			WHERE p.categoria = "Quejas"
 				AND p.fechaPublicacion LIKE "2021-%";
 
+/*Views Jimena Gomez*/
+CREATE VIEW creador AS
+SELECT e.nombreEstudiante, p.descripcion
+	from estudiantes e, posts p
+    WHERE e.codigoEstudiante = p.codigoEstudiante
+		AND p.descripcion like '%i%';
+        
+CREATE VIEW fecha AS
+SELECT c.fechaPublicacion, c.idComentario
+	FROM comentarios c
+	WHERE c.idComentario like'%12%';
+    
+CREATE VIEW id AS
+SELECT c.descripcion, c.idpost
+    from comentarios c 
+    where c.descripcion like '%me%';
+    
+CREATE VIEW informacion AS
+SELECT cum.codigoEstudiante, es.correo, es.nombreEstudiante
+	FROM estudiantes es, comentarios cum
+		WHERE cum.codigoEstudiante = es.codigoEstudiante
+        AND es.nombreEstudiante like'%ale%';
+
 
 
 COMMIT;

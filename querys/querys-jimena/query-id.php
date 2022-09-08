@@ -3,7 +3,7 @@
 
     $comentario = $_POST['com'];
 
-    $sql = "select c.descripcion, c.idpost
+    $sql = "SELECT c.descripcion, c.idpost
     from comentarios c 
     where c.descripcion like '%".$comentario."%';";
 ?>
