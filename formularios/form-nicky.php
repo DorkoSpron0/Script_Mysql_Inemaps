@@ -102,7 +102,7 @@
                 <div class="col-md-3">
                     <div class="card bg-dark">
                         <div class="card-body">
-                            <form action="../querys/querys-nicky/query-nicky2.php" method="POST">
+                            <form action="../querys/querys-nicky/query2.php" method="POST">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Codigo Estudiante</label>
                                     <input type="text" class="form-control" name="nombreEstudiante" required>
@@ -118,11 +118,29 @@
                 <div class="col-md-3">
                     <div class="card bg-dark">
                         <div class="card-body">
-                            <form action="../querys/querys-nicky/query-nicky2.php" method="POST">
+                            <form action="../querys/querys-nicky/query3.php" method="POST">
                                 <div class="form-group">
+                                <label for="exampleInputEmail1">id Minimo</label>
                                     <input type="number" name="idMin" class="form-control" required>
+                                    <label for="exampleInputEmail1">id Maximo</label>
                                     <input type="number" name="idMax" class="form-control"  required>
-                                    <input type="submit" value="Enviar">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-3">
+                    <div class="card bg-dark">
+                        <div class="card-body">
+                            <form action="../querys/querys-nicky/queyr4.php" method="POST">
+                                <div class="form-group">
+                                <label for="exampleInputEmail1">Fecha minima</label>
+                                    <input type="date" name="fechaPostMin" class="form-control" required>
+                                    <label for="exampleInputEmail1">Fecha maxima</label>
+                                    <input type="date" name="fechaPostMax" class="form-control" required>
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </div>
                             </form>
